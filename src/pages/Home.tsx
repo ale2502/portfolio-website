@@ -7,16 +7,23 @@ export default function Home() {
     <>
       {/* Hero */}
       <motion.section
-        className="flex flex-col items-center justify-center text-center py-24 px-4"
+        className="flex items-center min-h-screen"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="text-5xl md:text-7xl">FULL STACK DEVELOPER</h1>
-        <p className="mt-4 text-xl md:text-2xl text-text-muted">
-          Hey! I'm Alessandro, a former Civil Engineer who transioned into full
-          stack development
-        </p>
+        <div className="container text-left">
+          <h1 className="text-6xl md:text-8xl">
+            <span className="text-accent">FULL STACK</span>
+            <br />
+            DEVELOPER
+          </h1>
+          <p className="mt-6 max-w-md text-lg md:text-xl text-text-muted">
+            Hey, I'm Alessandro — a former Civil Engineer turned developer. I
+            build clean, functional web apps and I'm always shipping something
+            new.
+          </p>
+        </div>
       </motion.section>
 
       {/* Video Hero */}

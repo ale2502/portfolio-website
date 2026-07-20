@@ -5,6 +5,20 @@ const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 export default function Home() {
   return (
     <>
+      {/* Hero */}
+      <motion.section
+        className="flex flex-col items-center justify-center text-center py-24 px-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h1 className="text-5xl md:text-7xl">FULL STACK DEVELOPER</h1>
+        <p className="mt-4 text-xl md:text-2xl text-text-muted">
+          Hey! I'm Alessandro, a former Civil Engineer who transioned into full
+          stack development
+        </p>
+      </motion.section>
+
       {/* Video Hero */}
       <section className="video-hero">
         <div className="video-container">

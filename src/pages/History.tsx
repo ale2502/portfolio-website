@@ -36,8 +36,8 @@ export default function History() {
         className="story-section"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        viewport={{ amount: 0.4 }}
+        transition={{ duration: 1.4, ease: 'easeOut' }}
       >
         <div className="container">
           <h2>My Story</h2>
@@ -73,8 +73,8 @@ export default function History() {
                 className="timeline-item"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ amount: 0.4 }}
+                transition={{ duration: 1, delay: i * 0.1, ease: 'easeOut' }}
               >
                 <div className="timeline-dot" />
                 <div className="timeline-content">

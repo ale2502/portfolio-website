@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 
 const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 
@@ -9,8 +11,9 @@ export default function Home() {
       <motion.section
         className="relative flex items-center min-h-screen"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ amount: 0.4 }}
+        transition={{ duration: 1.4, ease: 'easeOut' }}
       >
         <div className="container text-left">
           <h1 className="text-6xl md:text-8xl">
@@ -37,14 +40,15 @@ export default function Home() {
 
       {/* Video Hero */}
       <section className="video-hero">
-        <div className="video-container">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/ldvtz73QZ0I?rel=0"
-            title="Intro video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
+        <motion.div
+          className="video-container"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ amount: 0.4 }}
+          transition={{ duration: 1.4, ease: 'easeOut' }}
+        >
+          <LiteYouTubeEmbed id="ldvtz73QZ0I" title="Intro video" />
+        </motion.div>
       </section>
 
       {/* Goals */}
@@ -71,8 +75,8 @@ export default function Home() {
                 className="rounded-lg border border-border bg-surface p-4 text-center"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
+                viewport={{ amount: 0.4 }}
+                transition={{ duration: 1, delay: i * 0.05, ease: 'easeOut' }}
               >
                 {skill}
               </motion.div>

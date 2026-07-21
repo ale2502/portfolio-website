@@ -7,7 +7,7 @@ export default function Home() {
     <>
       {/* Hero */}
       <motion.section
-        className="flex items-center min-h-screen"
+        className="relative flex items-center min-h-screen"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -18,11 +18,20 @@ export default function Home() {
             <br />
             DEVELOPER
           </h1>
-          <p className="mt-6 max-w-md text-lg md:text-xl text-text-muted">
-            Hey, I'm Alessandro — a former Civil Engineer turned developer. I
-            build clean, functional web apps and I'm always shipping something
-            new.
+          <p className="mt-6 max-w-2xl text-lg md:text-xl text-text-muted">
+            Hey, I'm Alessandro, a former Civil Engineer who became a software
+            developer. I'm communicative, ambitious, product-minded, and always
+            eager to learn.
           </p>
+        </div>
+        <div className="absolute bottom-10 right-6 md:bottom-16 md:right-16 text-right">
+          <p className="text-4xl md:text-5xl font-bold text-accent">3+</p>
+          <p className="text-sm text-text-muted">Years of Experience in Tech</p>
+
+          <p className="stat-gap text-4xl md:text-5xl font-bold text-accent">
+            900+
+          </p>
+          <p className="text-sm text-text-muted">Commits on GitHub last year</p>
         </div>
       </motion.section>
 

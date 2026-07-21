@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 :root {
-  --bg: #0a0a0a;
+  --bg: #121212;
   --surface: #141414;
   --surface-hover: #1e1e1e;
   --border: #222;
@@ -10,7 +10,7 @@
   --accent: #22d3ee;
   --accent-dim: #0891b2;
   --radius: 8px;
-  --max-w: 1024px;
+  --max-w: 1280px;
   --font-display: 'Bungee', system-ui, sans-serif;
 }
 
@@ -19,6 +19,10 @@ h2,
 h3,
 .logo {
   font-family: var(--font-display);
+}
+
+.stat-gap {
+  margin-top: 2rem;
 }
 
 @theme {
@@ -46,7 +50,12 @@ html {
 
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    'Quicksand',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -78,7 +87,7 @@ section {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 4rem;
   font-weight: 700;
   line-height: 1;
 }

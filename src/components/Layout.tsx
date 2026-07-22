@@ -16,38 +16,52 @@ const navLinks = [
 ];
 
 export default function Layout() {
+  const smoothWrapperRef = useRef(null);
+
+  useGSAP(() => {
+    ScrollSmoother.create({
+      wrapper: smoothWrapperRef.current,
+      content: '#smooth-content',
+      smooth: 1.4,
+      effects: true,
+    });
+  });
   return (
-    <div className="layout">
-      <CodeRain />
-      <header className="header">
-        <nav className="container nav">
-          <span className="logo">Alessandro</span>
-          <ul className="nav-links">
-            {navLinks.map(({ to, label }) => (
-              <li key={to}>
-                <NavLink
-                  to={to}
-                  end={to === '/'}
-                  className={({ isActive }) => (isActive ? 'active' : '')}
-                >
-                  {label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <Outlet />
-      </main>
-      <footer className="footer">
-        <div className="container">
-          <p>
-            &copy; {new Date().getFullYear()} Alessandro. Built with React &
-            TypeScript.
-          </p>
+    <div id="smooth-wrapper" ref={smoothWrapperRef}>
+      <div id="smooth-content">
+        <div className="layout">
+          <CodeRain />
+          <header className="header">
+            <nav className="container nav">
+              <span className="logo">Alessandro</span>
+              <ul className="nav-links">
+                {navLinks.map(({ to, label }) => (
+                  <li key={to}>
+                    <NavLink
+                      to={to}
+                      end={to === '/'}
+                      className={({ isActive }) => (isActive ? 'active' : '')}
+                    >
+                      {label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </header>
+          <main>
+            <Outlet />
+          </main>
+          <footer className="footer">
+            <div className="container">
+              <p>
+                &copy; {new Date().getFullYear()} Alessandro. Built with React &
+                TypeScript.
+              </p>
+            </div>
+          </footer>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

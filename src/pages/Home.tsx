@@ -1,42 +1,84 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 
 const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 
 export default function Home() {
+  const heroRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const paraRef = useRef<HTMLParagraphElement>(null);
+  const statYearsRef = useRef<HTMLDivElement>(null);
+  const statCommitsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: '+=60%',
+          scrub: 1,
+        },
+      });
+
+      tl.to(headingRef.current, { y: -60, ease: 'none' }, 0)
+        .to(paraRef.current, { y: 30, ease: 'none' }, 0)
+        .to(statYearsRef.current, { y: -30, ease: 'none' }, 0)
+        .to(statCommitsRef.current, { y: 45, ease: 'none' }, 0)
+        .to(
+          [
+            headingRef.current,
+            paraRef.current,
+            statYearsRef.current,
+            statCommitsRef.current,
+          ],
+          { opacity: 0, ease: 'none' },
+          0.4,
+        );
+    },
+    { scope: heroRef },
+  );
   return (
     <>
       {/* Hero */}
-      <motion.section
+      <section
+        ref={heroRef}
         className="relative flex items-center min-h-screen"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ amount: 0.4 }}
-        transition={{ duration: 1.4, ease: 'easeOut' }}
       >
         <div className="container text-left">
-          <h1 className="text-6xl md:text-8xl">
+          <h1 ref={headingRef} className="text-6xl md:text-8xl">
             <span className="text-accent">FULL STACK</span>
             <br />
             DEVELOPER
           </h1>
-          <p className="mt-6 max-w-2xl text-lg md:text-xl text-text-muted">
+          <p
+            ref={paraRef}
+            className="mt-6 max-w-2xl text-lg md:text-xl text-text-muted"
+          >
             Hey, I'm Alessandro, a former Civil Engineer who became a software
             developer. I'm communicative, ambitious, product-minded, and always
             eager to learn.
           </p>
         </div>
         <div className="absolute bottom-10 right-6 md:bottom-16 md:right-16 text-right">
-          <p className="text-4xl md:text-5xl font-bold text-accent">3+</p>
-          <p className="text-sm text-text-muted">Years of Experience in Tech</p>
-
-          <p className="stat-gap text-4xl md:text-5xl font-bold text-accent">
-            900+
-          </p>
-          <p className="text-sm text-text-muted">Commits on GitHub last year</p>
+          <div ref={statYearsRef}>
+            <p className="text-4xl md:text-5xl font-bold text-accent">3+</p>
+            <p className="text-sm text-text-muted">
+              Years of Experience in Tech
+            </p>
+          </div>
+          <div ref={statCommitsRef} className="stat-gap">
+            <p className="text-4xl md:text-5xl font-bold text-accent">900+</p>
+            <p className="text-sm text-text-muted">
+              Commits on GitHub last year
+            </p>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Video Hero */}
       <section className="video-hero">

@@ -1,5 +1,12 @@
+import { useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { useGSAP } from '@gsap/react';
 import CodeRain from './CodeRain';
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const navLinks = [
   { to: '/', label: 'Home' },

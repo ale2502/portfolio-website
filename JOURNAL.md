@@ -1,5 +1,26 @@
 # Progress Journal
 
+## 2026-07-22
+
+Scroll motion overhaul — moved the hero's exit animation off Framer Motion's `whileInView` (threshold-triggered, can't reverse/pause mid-scroll) onto **GSAP**, since the goal was continuous scroll-scrubbed motion matching tajmirul.site.
+
+**Tooling**
+- Installed `gsap` and `@gsap/react` (`useGSAP` hook — auto-cleans up timelines/ScrollTriggers on unmount).
+- Framer Motion kept for everything else (video, goals, tech stack, History page) — the two coexist deliberately.
+
+**Momentum scroll**
+- `ScrollSmoother` wraps the whole app in `Layout.tsx` (`#smooth-wrapper` / `#smooth-content`), giving the page a soft drift-to-stop feel instead of native instant-stop scrolling.
+
+**Hero exit effect**
+- Heading, paragraph, and the two stat lines each have their own ref and animate via one `gsap.timeline` with a scrubbed `ScrollTrigger` — they separate apart (alternating `y` direction per pair) then fade, reversibly, pausable mid-scroll.
+
+**Bugs fixed**
+- Heading appeared not to fade: it was being visually covered by the sticky header before its opacity tween finished, because the scroll range (`end: 'bottom top'`) was too long. Fixed by shortening `end` to `'+=60%'` so the animation completes before elements reach the header.
+
+**Next up**
+- Tune `y` magnitudes / `end` distance further to taste.
+- Navbar removal still deferred.
+
 ## 2026-07-20
 
 Styling system and site structure work, building toward a layout inspired by (but not copying) https://www.tajmirul.site/.

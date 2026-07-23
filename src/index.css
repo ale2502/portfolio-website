@@ -172,7 +172,7 @@ main {
   align-items: center;
   justify-content: center;
   min-height: auto;
-  padding: 4rem 0;
+  padding: 4rem 1.5rem;
 }
 
 .video-container {
@@ -390,7 +390,7 @@ main {
   }
   .video-hero {
     min-height: auto;
-    padding: 2rem 0;
+    padding: 2rem 1.5rem;
   }
   .goals-text {
     font-size: 1rem;

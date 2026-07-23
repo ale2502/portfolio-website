@@ -28,9 +28,9 @@ export default function Layout() {
   });
   return (
     <div id="smooth-wrapper" ref={smoothWrapperRef}>
+      <CodeRain />
       <div id="smooth-content">
         <div className="layout">
-          <CodeRain />
           <header className="header">
             <nav className="container nav">
               <span className="logo">Alessandro</span>

@@ -8,6 +8,7 @@ import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 
 export default function Home() {
+  // Hero
   const heroRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLParagraphElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -15,6 +16,12 @@ export default function Home() {
   const statYearsRef = useRef<HTMLDivElement>(null);
   const statCommitsRef = useRef<HTMLDivElement>(null);
 
+  // Video
+  const videoSectionRef = useRef<HTMLElement>(null);
+  const videoHeadingRef = useRef<HTMLHeadingElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP main hero
   useGSAP(
     () => {
       const tl = gsap.timeline({
@@ -44,6 +51,29 @@ export default function Home() {
         );
     },
     { scope: heroRef },
+  );
+
+  // GSAP video
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: videoSectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      tl.to(videoHeadingRef.current, { y: -40, ease: 'none' }, 0)
+        .to(videoContainerRef.current, { y: 50, ease: 'none' }, 0)
+        .to(
+          [videoHeadingRef.current, videoContainerRef.current],
+          { opacity: 0, ease: 'none' },
+          0.4,
+        );
+    },
+    { scope: videoSectionRef },
   );
   return (
     <>
@@ -92,16 +122,16 @@ export default function Home() {
       </section>
 
       {/* Video Hero */}
-      <section className="video-hero">
-        <motion.div
-          className="video-container"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ amount: 0.4 }}
-          transition={{ duration: 1.4, ease: 'easeOut' }}
+      <section ref={videoSectionRef} className="video-hero">
+        <h2
+          ref={videoHeadingRef}
+          className="text-3xl md:text-4xl text-center max-w-2xl mb-8"
         >
+          A lil bit about myself
+        </h2>
+        <div ref={videoContainerRef} className="video-container">
           <LiteYouTubeEmbed id="ldvtz73QZ0I" title="Intro video" />
-        </motion.div>
+        </div>
       </section>
 
       {/* Goals */}

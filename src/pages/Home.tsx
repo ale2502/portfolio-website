@@ -9,6 +9,7 @@ const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
+  const nameRef = useRef<HTMLParagraphElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paraRef = useRef<HTMLParagraphElement>(null);
   const statYearsRef = useRef<HTMLDivElement>(null);
@@ -25,12 +26,14 @@ export default function Home() {
         },
       });
 
-      tl.to(headingRef.current, { y: -60, ease: 'none' }, 0)
+      tl.to(nameRef.current, { y: -90, ease: 'none' }, 0)
+        .to(headingRef.current, { y: -40, ease: 'none' }, 0)
         .to(paraRef.current, { y: 30, ease: 'none' }, 0)
         .to(statYearsRef.current, { y: -30, ease: 'none' }, 0)
         .to(statCommitsRef.current, { y: 45, ease: 'none' }, 0)
         .to(
           [
+            nameRef.current,
             headingRef.current,
             paraRef.current,
             statYearsRef.current,
@@ -49,20 +52,28 @@ export default function Home() {
         ref={heroRef}
         className="relative flex items-center min-h-screen"
       >
-        <div className="container text-left">
-          <h1 ref={headingRef} className="text-6xl md:text-8xl">
-            <span className="text-accent">FULL STACK</span>
-            <br />
-            DEVELOPER
-          </h1>
-          <p
-            ref={paraRef}
-            className="mt-6 max-w-2xl text-lg md:text-xl text-text-muted"
-          >
-            Hey, I'm Alessandro, a former Civil Engineer who became a software
-            developer. I'm communicative, ambitious, product-minded, and always
-            eager to learn.
-          </p>
+        <div className="container text-left flex items-start gap-8 md:gap-16">
+          <div className="container text-left">
+            <p
+              ref={nameRef}
+              className="font-display text-sm md:text-ls tracking-widest text-text-muted uppercase mb-2"
+            >
+              Alessandro Jablonski
+            </p>
+            <h1 ref={headingRef} className="text-6xl md:text-8xl">
+              <span className="text-accent">FULL STACK</span>
+              <br />
+              DEVELOPER
+            </h1>
+            <p
+              ref={paraRef}
+              className="mt-6 max-w-2xl text-lg md:text-xl text-text-muted"
+            >
+              Hey, I'm Ale, a former Civil Engineer who became a software
+              developer. I'm communicative, ambitious, product-minded, and
+              always eager to learn.
+            </p>
+          </div>
         </div>
         <div className="absolute bottom-10 right-6 md:bottom-16 md:right-16 text-right">
           <div ref={statYearsRef}>

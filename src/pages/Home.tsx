@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
+import Timeline from '../components/Timeline';
 
 const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 
@@ -20,6 +21,10 @@ export default function Home() {
   const videoSectionRef = useRef<HTMLElement>(null);
   const videoHeadingRef = useRef<HTMLHeadingElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
+
+  // Statement
+  const statementSectionRef = useRef<HTMLElement>(null);
+  const statementTextRef = useRef<HTMLParagraphElement>(null);
 
   // GSAP main hero
   useGSAP(
@@ -74,6 +79,27 @@ export default function Home() {
         );
     },
     { scope: videoSectionRef },
+  );
+
+  // GSAP statement
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: statementSectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      tl.to(statementTextRef.current, { y: -90, ease: 'none' }, 0).to(
+        statementTextRef.current,
+        { opacity: 0, ease: 'none' },
+        0.4,
+      );
+    },
+    { scope: statementSectionRef },
   );
   return (
     <>
@@ -134,19 +160,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Goals */}
-      <section className="goals-section">
+      {/* Statement */}
+      <section ref={statementSectionRef} className="statement-section pb-24">
         <div className="container">
-          <h2>My Goal</h2>
-          <p className="goals-text">
-            I'm Alessandro, a fresh graduate from{' '}
-            <strong>Dev Academy Aotearoa</strong> in New Zealand. My goal is to
-            become a professional software developer — building applications
-            that make a difference, collaborating with great teams, and
-            continuously growing my skills.
+          <p
+            ref={statementTextRef}
+            className="text-4xl md:text-6xl leading-tight"
+          >
+            I'm a product-minded developer, with a huge interest in
+            entrepreneurship, ambitious and driven. I believe communication and
+            soft skills surpass technical skills.
           </p>
         </div>
       </section>
+
+      {/* Timeline */}
+      <Timeline />
 
       <section className="py-16">
         <div className="container">

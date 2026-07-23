@@ -47,13 +47,11 @@ export default function Timeline() {
         },
       });
 
-      tl.to(headingRef.current, { y: -60, ease: 'none' }, 0)
-        .to(itemsRef.current, { y: 50, ease: 'none' }, 0)
-        .to(
-          [headingRef.current, itemsRef.current],
-          { opacity: 0, ease: 'none' },
-          0.4,
-        );
+      tl.to(headingRef.current, { y: -60, ease: 'none' }, 0).to(
+        itemsRef.current,
+        { y: 50, ease: 'none' },
+        0,
+      );
     },
     { scope: sectionRef },
   );

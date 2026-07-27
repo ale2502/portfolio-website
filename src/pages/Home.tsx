@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 import Timeline from '../components/Timeline';
+import Projects from '../components/Projects';
 
 const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 
@@ -173,6 +174,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Projects */}
+      <Projects />
 
       {/* Timeline */}
       <Timeline />

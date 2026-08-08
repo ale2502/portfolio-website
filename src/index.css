@@ -477,6 +477,86 @@ main {
   flex-shrink: 0;
 }
 
+.hamburger-btn {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 300;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 55%;
+  height: 2px;
+  background: var(--text);
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.hamburger-btn.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 250;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 80vw;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  z-index: 275;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.drawer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.drawer-links a {
+  font-size: 1.5rem;
+  font-family: var(--font-display);
+  color: var(--text);
+}
+
+.drawer-links a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
 /* Contact */
 .contact-page {
   max-width: 560px;

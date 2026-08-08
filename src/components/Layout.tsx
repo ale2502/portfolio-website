@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { useGSAP } from '@gsap/react';
 import CodeRain from './CodeRain';
+import NavDrawer from './NavDrawer';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -19,22 +20,16 @@ export default function Layout() {
       effects: true,
     });
   });
+
   return (
     <div id="smooth-wrapper" ref={smoothWrapperRef}>
       <CodeRain />
+      <NavDrawer />
       <div id="smooth-content">
         <div className="layout">
           <main>
             <Outlet />
           </main>
-          <footer className="footer">
-            <div className="container">
-              <p>
-                &copy; {new Date().getFullYear()} Alessandro. Built with React &
-                TypeScript.
-              </p>
-            </div>
-          </footer>
         </div>
       </div>
     </div>

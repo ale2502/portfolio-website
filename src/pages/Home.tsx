@@ -118,29 +118,6 @@ export default function Home() {
             </motion.div>
           </motion.div>
         </div>
-        <div className="absolute bottom-10 right-6 md:bottom-16 md:right-16 text-right">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
-          >
-            <p className="text-4xl md:text-5xl font-bold text-accent">3+</p>
-            <p className="text-sm text-text-muted">
-              Years of Experience in Tech
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.75, ease: 'easeOut' }}
-            className="stat-gap"
-          >
-            <p className="text-4xl md:text-5xl font-bold text-accent">900+</p>
-            <p className="text-sm text-text-muted">
-              Commits on GitHub last year
-            </p>
-          </motion.div>
-        </div>
       </section>
 
       {/* Video Hero */}

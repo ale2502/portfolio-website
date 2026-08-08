@@ -43,7 +43,7 @@ export default function Projects() {
       <div className="container">
         <h1>Projects</h1>
         <p className="section-subtitle">
-          Here are some of the projects I've been building.
+          Here are some of the projects I've been working on.
         </p>
         <motion.div
           className="projects-grid"

@@ -73,11 +73,27 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className="project-links">
-                  <a href={p.live} target="_blank" rel="noreferrer">
+                  <a
+                    href={p.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-live-btn"
+                  >
+                    <svg>
+                      <use href="/icons.svg#globe-icon" />
+                    </svg>
                     Live Demo
                   </a>
-                  <a href={p.code} target="_blank" rel="noreferrer">
-                    Source Code
+                  <a
+                    href={p.code}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-icon-link"
+                    aria-label="Source code"
+                  >
+                    <svg>
+                      <use href="/icons.svg#github-icon" />
+                    </svg>
                   </a>
                 </div>
               </div>

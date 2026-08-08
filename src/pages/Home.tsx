@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 import Timeline from '../components/Timeline';
@@ -10,14 +11,6 @@ import Projects from '../components/Projects';
 const skills = ['TypeScript', 'React', 'Node.js', 'SQL', 'Git', 'CSS'];
 
 export default function Home() {
-  // Hero
-  const heroRef = useRef<HTMLElement>(null);
-  const nameRef = useRef<HTMLParagraphElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const paraRef = useRef<HTMLParagraphElement>(null);
-  const statYearsRef = useRef<HTMLDivElement>(null);
-  const statCommitsRef = useRef<HTMLDivElement>(null);
-
   // Video
   const videoSectionRef = useRef<HTMLElement>(null);
   const videoHeadingRef = useRef<HTMLHeadingElement>(null);
@@ -27,37 +20,14 @@ export default function Home() {
   const statementSectionRef = useRef<HTMLElement>(null);
   const statementTextRef = useRef<HTMLParagraphElement>(null);
 
-  // GSAP main hero
-  useGSAP(
-    () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: '+=60%',
-          scrub: 1,
-        },
-      });
-
-      tl.to(nameRef.current, { y: -90, ease: 'none' }, 0)
-        .to(headingRef.current, { y: -40, ease: 'none' }, 0)
-        .to(paraRef.current, { y: 30, ease: 'none' }, 0)
-        .to(statYearsRef.current, { y: -30, ease: 'none' }, 0)
-        .to(statCommitsRef.current, { y: 45, ease: 'none' }, 0)
-        .to(
-          [
-            nameRef.current,
-            headingRef.current,
-            paraRef.current,
-            statYearsRef.current,
-            statCommitsRef.current,
-          ],
-          { opacity: 0, ease: 'none' },
-          0.4,
-        );
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
     },
-    { scope: heroRef },
-  );
+  };
 
   // GSAP video
   useGSAP(
@@ -105,46 +75,71 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section
-        ref={heroRef}
-        className="relative flex items-center min-h-screen"
-      >
+      <section className="relative flex items-center min-h-screen">
         <div className="container text-left flex items-start gap-8 md:gap-16">
-          <div className="container text-left">
-            <p
-              ref={nameRef}
+          <motion.div
+            className="container text-left"
+            initial="hidden"
+            animate="visible"
+            variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+          >
+            <motion.p
+              variants={fadeUp}
               className="font-display text-sm md:text-ls tracking-widest text-text-muted uppercase mb-2"
             >
               Alessandro Jablonski
-            </p>
-            <h1 ref={headingRef} className="text-6xl md:text-8xl">
+            </motion.p>
+            <motion.h1 variants={fadeUp} className="text-6xl md:text-8xl">
               <span className="text-accent">FULL STACK</span>
               <br />
               DEVELOPER
-            </h1>
-            <p
-              ref={paraRef}
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
               className="mt-6 max-w-2xl text-lg md:text-xl text-text-muted"
             >
               Hey, I'm Ale, a former Civil Engineer who became a software
               developer. I'm communicative, ambitious, product-minded, and
               always eager to learn.
-            </p>
-          </div>
+            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              className="hero-actions flex flex-wrap gap-4"
+            >
+              <Link to="/projects" className="hero-btn">
+                Projects
+              </Link>
+              <Link to="/about" className="hero-btn">
+                About Me
+              </Link>
+              <Link to="/contact" className="hero-btn">
+                Contact
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
         <div className="absolute bottom-10 right-6 md:bottom-16 md:right-16 text-right">
-          <div ref={statYearsRef}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
+          >
             <p className="text-4xl md:text-5xl font-bold text-accent">3+</p>
             <p className="text-sm text-text-muted">
               Years of Experience in Tech
             </p>
-          </div>
-          <div ref={statCommitsRef} className="stat-gap">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.75, ease: 'easeOut' }}
+            className="stat-gap"
+          >
             <p className="text-4xl md:text-5xl font-bold text-accent">900+</p>
             <p className="text-sm text-text-muted">
               Commits on GitHub last year
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 

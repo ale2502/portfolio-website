@@ -75,10 +75,10 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex items-center min-h-screen">
-        <div className="container text-left flex items-start gap-8 md:gap-16">
+      <section className="relative flex items-center justify-center min-h-screen">
+        <div className="flex items-center gap-8 md:gap-10 px-6">
           <motion.div
-            className="container text-left"
+            className="text-left"
             initial="hidden"
             animate="visible"
             variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
@@ -96,7 +96,7 @@ export default function Home() {
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="mt-6 max-w-2xl text-lg md:text-xl text-text-muted"
+              className="mt-6 max-w-lg text-lg md:text-xl text-text-muted"
             >
               Hey, I'm Ale, a former Civil Engineer who became a software
               developer. I'm communicative, ambitious, product-minded, and
@@ -117,6 +117,24 @@ export default function Home() {
               </Link>
             </motion.div>
           </motion.div>
+          <div className="hero-photo-wrap">
+            <motion.img
+              src="/me.png"
+              alt="Alessandro Jablonski"
+              className="hero-photo hidden md:block"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: [0, -15, 0] }}
+              transition={{
+                opacity: { duration: 0.6, delay: 0.6, ease: 'easeOut' },
+                y: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  delay: 0.6,
+                },
+              }}
+            />
+          </div>
         </div>
       </section>
 

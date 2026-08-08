@@ -1,5 +1,48 @@
 # Progress Journal
 
+## 2026-08-08
+
+Big direction change: moved off the single-page scroll-scrubbed layout toward a simpler multi-page site (Home / Projects / About Me / Contact), no persistent navbar. Home keeps just hero content; Projects, About Me, and Contact are full standalone pages.
+
+**Hero (`src/pages/Home.tsx`)**
+- Replaced the GSAP `ScrollTrigger` exit timeline with a plain Framer Motion mount fade-in (staggered: name → heading → paragraph → buttons). Dropped `ScrollSmoother`-driven motion from the hero entirely — it no longer needs to scroll to reveal itself.
+- Removed the years-of-experience / commits stats block.
+- Added three nav buttons (`.hero-btn`, Projects/About Me/Contact) under the intro paragraph — these are now the site's primary navigation on Home, replacing the old navbar's job.
+- Added a circular profile photo (`public/me.png`) next to the text: `object-fit: cover` + `object-position: center 20%` to avoid cropping the head (source photo is portrait `1122×1402`, so only vertical `object-position` has any effect — the scaled width exactly fills the box with zero horizontal slack), continuous floating y-loop via Framer Motion (`animate.y: [0, -15, 0]`, `repeat: Infinity`, split from the one-time `opacity` fade via per-property `transition` overrides so the fade doesn't loop too).
+- Restructured the hero row into two flex children (text block, photo) and centered the whole compact group on the page (`justify-content: center` on the section) instead of letting it stretch to the container's full width — removing the redundant nested `.container` class (its `margin: 0 auto` was silently fighting centering via flex auto-margins) was the actual fix, not just tuning `gap`.
+- Shortened the intro paragraph copy and narrowed it (`max-w-lg`) to force more line wraps.
+- Removed the navbar from `Layout.tsx` entirely (dead CSS: `.header`/`.nav`/`.nav-links`/`.logo`, not yet cleaned up).
+
+**Projects page (`src/pages/Projects.tsx`)**
+- Replaced placeholder data with real GrindNotes project info (title/links), moved over from the now-removed home-embedded `components/Projects.tsx` section.
+- Added a staggered Framer Motion entrance (`container`/`fadeUp` variants, `staggerChildren`) for the card grid, triggered on mount rather than scroll.
+- Added phone-mockup preview images per card (`public/projects/*.png`, AI-generated placeholders, `z_image` model) — restructured cards into `.project-card` (image, full-bleed top, own rounded top corners) + `.project-card-body` (padded text content) so the image can bleed edge-to-edge without the card's own padding pushing it in.
+- Iterated on card hover: border-color change → attempted body-only border → settled on a whole-card cyan `box-shadow` glow (`rgba(34, 211, 238, 0.35)`, matches `--accent` written out since `var()` can't take partial opacity).
+- Card background bumped from `var(--surface)` to `var(--surface-hover)` (lighter, more contrast against the page background) with a visible `#3a3a3a` border, after a "make the whole card light-themed" attempt looked wrong against the dark site.
+- Fixed tags/links floating instead of sticking to the card's bottom when descriptions are short: `.project-card-body` needed `flex: 1` so it actually fills the card's grid-stretched height, letting `.project-card p`'s existing `flex: 1` (previously a no-op with nothing to grow into) push the tags/links down properly.
+- Replaced "Live Demo"/"Source Code" text links with icon buttons: added a `globe-icon` symbol to `public/icons.svg` (iterated from a plain wireframe circle+line, to a denser wireframe, to a real continent-silhouette path borrowed from Font Awesome's `earth-americas`, CC BY 4.0 — attribution not yet added anywhere) and reused the existing (previously unused) `github-icon` symbol, switching its hardcoded `fill="#08060d"` to `fill="currentColor"` so both icons follow the link's text color and turn `--accent` on hover. "Live Demo" ended up different from "Source Code": it's now a rounded-rectangle button with icon + text label (`.project-live-btn`, radius matching `.skill-tag`), while "Source Code" stayed a plain circular icon-only button (`.project-icon-link`).
+
+**Navigation**
+- New `src/components/NavDrawer.tsx`: self-contained hamburger + slide-in drawer (from the right, dimmed backdrop, Framer Motion `AnimatePresence`), pulled out of `Layout.tsx` the same way `Timeline`/`Projects` were pulled out of `Home.tsx` earlier. Hidden on `/` via its own `useLocation()` check (`return null` on Home) since Home already has the hero buttons as its nav.
+- Removed the footer from `Layout.tsx` (dead CSS: `.footer`, not yet cleaned up).
+
+**Assets**
+- `public/me.png`: user's own photo (renamed from a messy default export filename with spaces/commas).
+- `public/favicon-photo.png`: circular-cropped version of the same photo for the favicon, cropped via `magick` to match the exact same framing as the hero circle (56px top offset on a 1122×1122 square crop, i.e. the same effective `object-position: center 20%`), circular alpha mask, 512×512. Wired into `index.html`, replacing `favicon.svg` (left in `public/`, unused).
+
+**Gotchas (see `.claude/skills/tailwind-layer-check/SKILL.md` and the `project-hero-redesign` memory for the full writeups)**
+- Tailwind v4 unlayered-CSS-beats-utilities bug recurred a 4th time (hero button margin). First fix attempt (wrap all of `index.css`'s plain rules into `@layer base`/`@layer components`) was reverted — it un-silenced *every* previously-broken Tailwind class at once (h1 size, several margins), not just the one being fixed, since much of the site's tuned look depended on the bug. Went back to the established scoped-one-off-class pattern instead. Skill file updated to default to that going forward.
+- `position: fixed` elements need to live outside `#smooth-content` (siblings of it inside `#smooth-wrapper`), not nested inside — `ScrollSmoother`'s transform breaks fixed positioning for descendants. Applied proactively this time for `NavDrawer` based on the earlier `CodeRain` bug, instead of rediscovering it.
+- Flex `margin: 0 auto` on a flex item actively consumes leftover main-axis space, same as `flex-grow` would — bit the hero-photo layout twice (once via an explicit `flex-1`, then again via a leftover nested `.container` class nobody noticed was still doing the same thing).
+- `object-fit: cover` cropping is single-axis when the image and box aspect ratios differ enough — a portrait photo in a square box only has vertical crop room, so `object-position`'s horizontal value can be a total no-op depending on the source image's proportions.
+
+**Next up**
+- Font Awesome attribution for the globe icon (CC BY 4.0) not yet added anywhere.
+- Dead CSS from removed navbar/footer/old `.project-image` etc. not cleaned up.
+- About Me page not started yet — still needs Video + Statement + Timeline content migrated over from `Home.tsx`/`History.tsx`, plus a decision on whether the Tech Stack grid moves there too (still undecided).
+- Source Code button could get the same icon+label treatment as Live Demo for consistency, or stay icon-only — open question.
+- Drawer link destinations assume `/about` exists — it doesn't yet.
+
 ## 2026-07-28
 
 Added a Projects section to the home page, following the same section-scoped GSAP pattern as Timeline/Video/Statement.

@@ -15,6 +15,7 @@ const projects = [
     desc: 'Placeholder description — what it does, the problem it solves, and your role building it.',
     tech: ['SQL', 'Express', 'CSS'],
     live: '#',
+    code: '#',
   },
   {
     title: 'Project Three',

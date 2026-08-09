@@ -458,19 +458,17 @@ main {
 }
 
 /* Contact page */
-.contact-page {
-  max-width: 560px;
-}
-
 .contact-page p {
   color: var(--text-muted);
   margin-bottom: 2rem;
+  max-width: 560px;
 }
 
 .contact-links {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  max-width: 560px;
 }
 
 .contact-item {
@@ -492,6 +490,75 @@ main {
 
 .contact-icon {
   font-size: 1.2rem;
+}
+
+/* Contact */
+
+.contact-icon-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.contact-icon-row--center {
+  justify-content: center;
+}
+
+.home-contact-section {
+  padding-top: 0;
+}
+
+.contact-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.contact-icon-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-icon-link svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-icon-link.contact-icon-link--whatsapp {
+  color: #25d366;
+}
+
+.contact-icon-link.contact-icon-link--whatsapp:hover {
+  color: #25d366;
+  border-color: var(--accent);
+}
+
+.contact-icon-link.contact-icon-link--linkedin {
+  color: #0a66c2;
+}
+
+.contact-icon-link.contact-icon-link--linkedin:hover {
+  color: #0a66c2;
+  border-color: var(--accent);
+}
+
+.contact-icon-link.contact-icon-link--youtube {
+  color: #ff0000;
+}
+
+.contact-icon-link.contact-icon-link--youtube:hover {
+  color: #ff0000;
+  border-color: var(--accent);
 }
 
 /* Responsive */

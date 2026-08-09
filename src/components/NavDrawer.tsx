@@ -6,7 +6,6 @@ const drawerLinks = [
   { to: '/', label: 'Home' },
   { to: '/projects', label: 'Projects' },
   { to: '/about', label: 'About Me' },
-  { to: '/contact', label: 'Contact' },
 ];
 
 export default function NavDrawer() {

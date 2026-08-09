@@ -9,7 +9,7 @@ export default function Home() {
       y: 0,
       transition: { duration: 0.6, ease: 'easeOut' },
     },
-  };
+  } as const;
 
   return (
     <section className="relative flex items-center justify-center min-h-screen">

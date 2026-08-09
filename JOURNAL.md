@@ -1,5 +1,43 @@
 # Progress Journal
 
+## 2026-08-09
+
+Built out the About page, retired Home's old scroll sections in favor of a single-viewport hero, and spent most of the session on a new global "contact dock" — plus a real Vercel build failure that traced back to a Framer Motion typing gap.
+
+**About page (`src/pages/About.tsx`)**
+- New page at `/about`, wired into `App.tsx`. Heading + subtitle matches the Projects page pattern (`.section-subtitle`).
+- Video (reused Home's `LiteYouTubeEmbed`, same video id) + a "big statement" pull-quote sit side by side (`.about-intro-grid`, flex row) — went through several layout iterations (tried centering both stacked, reverted back to side-by-side per feedback) before landing here.
+- Pull-quote styling: large accent-colored opening/closing curly quotes via `::before`/`::after` on the statement `<p>`, `position: absolute` so they hang outside the text block instead of pushing it down in normal flow — first attempt used `display: block` which stacked the quote flush above the text; switched to absolute positioning + `padding-left`/`padding-right` on the paragraph to fix.
+- Timeline reused as-is from the existing `components/Timeline.tsx` (shared with Home) rather than duplicating `History.tsx`'s inline copy.
+- `Timeline.tsx` had its GSAP `ScrollTrigger` scrub effect (on the heading + item container) stripped out per request, keeping only the existing per-item Framer Motion `whileInView` fade — a simplification, not a bug fix (GSAP was working, just no longer wanted for this component).
+
+**Homepage trim (`src/pages/Home.tsx`)**
+- Cut down to hero-only (name, title, statement, buttons, photo) — removed the Video Hero, Statement, embedded Projects widget, and Tech Stack sections along with their now-dead GSAP refs/`useGSAP` hooks and the `LiteYouTubeEmbed`/`Timeline`/`Projects` imports.
+- `History.tsx` and `components/Projects.tsx` (the homepage-only project-card widget) deleted as a consequence — both became fully orphaned (nothing in the nav pointed to either anymore).
+
+**`index.css` cleanup**
+- Full dead-rule audit: cross-checked every class selector against actual usage in `.tsx` files via `grep -rl`, then removed everything with zero hits — old `.header`/`.nav`/`.logo`/`.nav-links`/`.footer` (superseded by the hamburger drawer), `.video-hero`/`.video-container`/`.statement-section` (old Home sections), `.goals-section`/`.goals-text`/`.story-content` (pre-dated this session, never referenced), `.projects-section`/`.home-project-*`/`.skills-grid` (deleted homepage widget). ~680 lines → ~460.
+- Reorganized what's left into clearly commented sections (Hero, Nav drawer, Timeline, About page, Projects page, Contact) instead of the prior scattered order.
+- This was a one-time, explicitly-requested exception to the standing "snippets only, no direct edits" rule for this repo — reverted to snippets-only again immediately after.
+
+**Contact icons → global "dock" (`src/components/ContactDock.tsx`)**
+- Contact page originally got a redesigned icon row (square buttons, brand hover colors) replacing the old text-link list; brand colors/paths for WhatsApp (`#25D366`), LinkedIn (`#0A66C2`), YouTube (`#FF0000`) and their SVG paths pulled from `simple-icons`' GitHub source via `curl`/`WebFetch` rather than recalled from memory — first attempt at the WhatsApp icon *was* hand-recalled and came out with a malformed path (tiny corrupted phone-handset shape), which is why later icons were fetched from source instead.
+- Then generalized further: extracted into a standalone `ContactDock` component, mounted once in `Layout.tsx` as a sibling of `NavDrawer` (outside `#smooth-content`, same fixed-position-vs-`ScrollSmoother` constraint as before) so it's a persistent, app-wide fixed dock rather than per-page content. `Contact.tsx`/`/contact` route retired as a consequence (functionality fully absorbed into the dock) — same pattern as `History.tsx`'s retirement.
+- YouTube icon fix: the brand mark is a single path where the play-button triangle is a *cutout* (relies on the path's fill-rule to show whatever's behind it as "white") — looked transparent once the dock's background was removed. Split into two `<path>`s: the badge shape (`currentColor`) plus a separate triangle path hardcoded `fill="#fff"`.
+- GitHub icon on the dock looked visibly smaller than the others despite identical CSS (`.contact-icon-link svg { width: 24px; height: 24px }` applies uniformly) — root cause was the source artwork itself (GitHub's mark has more built-in padding relative to its viewBox than e.g. YouTube's near-edge-to-edge rectangle), not a CSS bug. Fixed with a per-icon size modifier; first attempt (`.contact-icon-link--github svg`) silently lost to the base rule because they're tied in specificity and the base rule came later in the file — same class of bug as the color modifiers, fixed the same way (`.contact-icon-link.contact-icon-link--github svg`, two classes to force higher specificity regardless of source order).
+- Dock container styling went through many rounds (bare icons → pill with background+shadow → stripped to bare again → per-icon glow → pill again with rectangle corners instead of full pill → radial-gradient glow → box-shadow-following-border-radius glow) and ended back at the original bare version (fixed-position flex row, `gap: 1rem`, no background/border/shadow) — net zero diff against the pill/glow experiments by the end of the session.
+- Added a `BackHome` component (small arrow + "Home" link, new `arrow-left-icon` symbol) above the `<h1>` on Projects and About, as a lighter-weight way back than the hamburger drawer.
+
+**Vercel deploy failure (real bug, not cosmetic)**
+- `npm run build` (`tsc -b && vite build`) failed on Vercel with `TS2322` across `ContactDock.tsx`/`Home.tsx`/`About.tsx`/`Projects.tsx`: each file's `fadeUp` variants object has `ease: 'easeOut'`, and TypeScript widens that to plain `string` on a bare `const`, which doesn't satisfy Framer Motion's `Transition['ease']` (`Easing | Easing[]`) type. `npm run dev` never surfaced this because Vite's dev server uses esbuild and skips type-checking entirely — this had apparently been silently broken for a few commits before Vercel caught it.
+- Fixed by appending `as const` to each `fadeUp` object (4 locations) rather than adding explicit `Variants` type annotations — smaller diff, no new imports. Verified against the actual `npm run build` command (not just `tsc --noEmit`) before calling it fixed.
+- Lesson: local `tsc -b --noEmit` checks I'd been running only confirmed no *new* errors were introduced, not that the existing ones were harmless — should have run the real `npm run build` command earlier to know it was actually failing.
+
+**Next up**
+- Small leftover: duplicated `/* Contact dock */` comment above `.contact-dock` in `index.css`, cosmetic only.
+- Font Awesome attribution for the globe icon (from 2026-08-08) still not added anywhere.
+- GitHub icon on the Projects page (`.project-icon-link svg`) likely has the same small-relative-to-viewBox look as the dock's did — not yet addressed there.
+
 ## 2026-08-08
 
 Big direction change: moved off the single-page scroll-scrubbed layout toward a simpler multi-page site (Home / Projects / About Me / Contact), no persistent navbar. Home keeps just hero content; Projects, About Me, and Contact are full standalone pages.

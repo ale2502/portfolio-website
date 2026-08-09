@@ -358,6 +358,7 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2.5rem;
+  padding-bottom: 6rem;
 }
 
 .project-card {
@@ -559,6 +560,18 @@ main {
 .contact-icon-link.contact-icon-link--youtube:hover {
   color: #ff0000;
   border-color: var(--accent);
+}
+
+/* Contact dock */
+/* Contact dock */
+.contact-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 200;
 }
 
 /* Responsive */

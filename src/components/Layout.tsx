@@ -6,6 +6,7 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { useGSAP } from '@gsap/react';
 import CodeRain from './CodeRain';
 import NavDrawer from './NavDrawer';
+import ContactDock from './ContactDock';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -25,6 +26,7 @@ export default function Layout() {
     <div id="smooth-wrapper" ref={smoothWrapperRef}>
       <CodeRain />
       <NavDrawer />
+      <ContactDock />
       <div id="smooth-content">
         <div className="layout">
           <main>

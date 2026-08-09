@@ -35,9 +35,9 @@ export default function Home() {
             variants={fadeUp}
             className="mt-6 max-w-lg text-lg md:text-xl text-text-muted"
           >
-            Hey, I'm Ale, a former Civil Engineer who became a software
-            developer. I'm communicative, ambitious, product-minded, and always
-            eager to learn.
+            Hey, I'm Ale, a former Civil Engineer turned software developer. I'm
+            communicative, ambitious, and aware that, with AI, being a developer
+            is no longer just about writing code.
           </motion.p>
           <motion.div
             variants={fadeUp}

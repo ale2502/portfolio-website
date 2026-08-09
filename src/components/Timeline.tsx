@@ -1,7 +1,4 @@
-import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 
 const timeline = [
   {
@@ -32,35 +29,11 @@ const timeline = [
 ];
 
 export default function Timeline() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const itemsRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      });
-
-      tl.to(headingRef.current, { y: -60, ease: 'none' }, 0).to(
-        itemsRef.current,
-        { y: 50, ease: 'none' },
-        0,
-      );
-    },
-    { scope: sectionRef },
-  );
-
   return (
-    <section ref={sectionRef} className="timeline-section">
+    <section className="timeline-section">
       <div className="container">
-        <h2 ref={headingRef}>My Journey</h2>
-        <div ref={itemsRef} className="timeline">
+        <h2>My Journey</h2>
+        <div className="timeline">
           {timeline.map((item, i) => (
             <motion.div
               key={i}

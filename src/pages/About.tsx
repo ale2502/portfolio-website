@@ -19,7 +19,7 @@ export default function About() {
       <div className="container">
         <h1>About Me</h1>
         <p className="section-subtitle">
-          A bit more about who I am and where I'm headed.
+          A bit more about who I am and my personality.
         </p>
 
         <motion.div

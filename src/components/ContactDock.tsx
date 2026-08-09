@@ -44,7 +44,7 @@ export default function ContactDock() {
         href="https://github.com/ale2502"
         target="_blank"
         rel="noreferrer"
-        className="contact-icon-link"
+        className="contact-icon-link contact-icon-link--github"
         aria-label="GitHub"
         variants={fadeUp}
       >

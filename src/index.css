@@ -524,6 +524,12 @@ main {
     color 0.2s ease;
 }
 
+/* Styling only github icon on dock */
+.contact-icon-link.contact-icon-link--github svg {
+  width: 29px;
+  height: 29px;
+}
+
 .contact-icon-link:hover {
   border-color: var(--accent);
   color: var(--accent);
@@ -563,7 +569,6 @@ main {
 }
 
 /* Contact dock */
-/* Contact dock */
 .contact-dock {
   position: fixed;
   left: 50%;
@@ -572,6 +577,26 @@ main {
   display: flex;
   gap: 1rem;
   z-index: 200;
+}
+
+/* Back to home link */
+.back-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.back-home-link:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.back-home-link svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* Responsive */

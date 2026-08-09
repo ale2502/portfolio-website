@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import BackHome from '../components/BackHome';
 
 const projects = [
   {
@@ -41,6 +42,7 @@ export default function Projects() {
   return (
     <section>
       <div className="container">
+        <BackHome />
         <h1>Projects</h1>
         <p className="section-subtitle">
           Here are some of the projects I've been working on.

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 import Timeline from '../components/Timeline';
+import BackHome from '../components/BackHome';
 
 const container = {
   hidden: {},
@@ -17,6 +18,7 @@ export default function About() {
   return (
     <section>
       <div className="container">
+        <BackHome />
         <h1>About Me</h1>
         <p className="section-subtitle">
           A bit more about who I am and my personality.

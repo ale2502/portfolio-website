@@ -1,5 +1,34 @@
 # Progress Journal
 
+## 2026-08-11
+
+Mobile polish pass on the About page, a couple of small UI additions (muted autoplay video, persistent contact-dock glow), and some housekeeping (image compression, README rewrite).
+
+**About page mobile fixes (`src/index.css`)**
+- Root cause of three stacked bugs (video overflowing horizontally, its bottom getting cropped, and a huge gap before the "My Journey" heading): `.about-video`/`.about-statement`'s `flex: 1 1 400px`/`flex: 1 1 320px` were written for the desktop row layout, where the flex main axis is horizontal. The mobile media query switches to `flex-direction: column`, which flips the main axis to vertical — so those same basis values got reinterpreted as *height*, fighting the video's `aspect-ratio: 16/9` and forcing `.about-statement` to stay ~320px tall regardless of content. Fixed by resetting both to `flex: none; width: 100%; min-width: 0;` in the mobile block.
+- Follow-up: reduced `.about-intro-grid`'s `padding-top`/`padding-bottom` and `.timeline-section`'s `padding-top` (mobile only) — the two stacked `section` default paddings (4rem each) plus the grid's own padding were adding up to ~7-11rem of dead space between the pull-quote and the timeline.
+- Decorative quote marks (`.about-statement p::before`/`::after`, normally `5rem` with negative offsets) also got mobile-only smaller sizes/offsets — at full size they were pushing past the container edge and contributing to the horizontal scrollbar.
+
+**Hamburger button** — mobile-only `width`/`height` reduced from 56px to 48px (`.hamburger-btn` in the existing `@media (max-width: 768px)` block); the open/close X-animation didn't need touching since its `translateY` math is driven by span height + gap, not the button's box size.
+
+**Muted autoplay intro video (`src/pages/About.tsx`)** — added `autoplay muted` to the `LiteYouTubeEmbed`. The library only actually appends YouTube's `autoplay=1` param when `muted` is also true (browsers block unmuted autoplay outright), so both props were required together. Trade-off: this skips the "lite" embed's click-to-load deferral, so the iframe now loads immediately on page visit.
+
+**Project images → WebP (`public/projects/`)** — converted all three project screenshots (`cwebp -q 82`), replacing the new "Portfolio website" screenshot and re-encoding `grindnotes.png`/`project-three.png`. ~3.2MB → ~50KB each (~99% smaller, visually lossless per PSNR ~49-50dB). Old PNGs removed, `Projects.tsx` image paths updated. Also added `Framer Motion` to that project's tag list.
+
+**Contact dock (`.contact-icon-link`, `src/index.css`)**
+- Added the same cyan glow used on project-card hover (`box-shadow: 0 0 15px rgba(34, 211, 238, 0.35)`), but as a permanent base-state style rather than hover-only, per feedback after the first pass.
+- Border color changed from `var(--border)` to `#3a3a3a` to match the color already used on `.skill-tag` (project-card tech pills) — same grey now used in both places.
+- Extended `.project-card` itself with the same `#3a3a3a` border, to compare how it looks against the tags/dock.
+
+**GrindNotes card note (`src/pages/Projects.tsx`)** — added an optional `note` field on project objects, rendered as a small italic `<p className="project-note">` below the description, gated with `{p.note && ...}` so only GrindNotes shows it. Used to flag that its API (hosted on Render, `onrender.com` — the request described it as "Vercel" but the live URL is actually Render) can take a few seconds to spin up on first load.
+
+**README.md** — full rewrite, replacing the untouched default Vite/React template boilerplate with a short, plain-language description of the actual site (what's on it, stack, how to run locally). Treated as a standing tutor-mode exception like `JOURNAL.md` itself, since it's prose/documentation rather than code to learn by typing.
+
+**Next up**
+- Still open from prior sessions: mobile hero-photo alignment decision (left vs. centered), Font Awesome attribution for the globe icon, general dead-CSS cleanup, duplicated `/* Contact dock */` comment in `index.css`, and Projects-page GitHub icon sizing (`.project-icon-link svg`) likely has the same small-relative-to-viewBox look the dock's GitHub icon had.
+- Double-check whether GrindNotes' slow-load note should actually name "Render" instead of staying platform-agnostic.
+- `Project Three` card is still a placeholder (title/desc/links) — needs real content whenever that project is ready.
+
 ## 2026-08-10
 
 Mobile responsive pass on the hero (`src/pages/Home.tsx`, `src/index.css`) — stacked layout, photo now visible on small screens, missing side padding fixed.

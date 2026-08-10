@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <section className="relative flex items-center justify-center min-h-screen">
-      <div className="flex items-center gap-8 md:gap-10 px-6">
+      <div className="hero-content flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-10">
         <motion.div
           className="text-left"
           initial="hidden"
@@ -55,7 +55,7 @@ export default function Home() {
           <motion.img
             src="/me.png"
             alt="Alessandro Jablonski"
-            className="hero-photo hidden md:block"
+            className="hero-photo"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: [0, -15, 0] }}
             transition={{

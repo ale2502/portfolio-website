@@ -139,6 +139,10 @@ main {
   margin-top: 1rem;
 }
 
+.hero-content {
+  padding: 0 1.5rem;
+}
+
 .hero-photo {
   width: 250px;
   height: 250px;
@@ -620,5 +624,10 @@ main {
   }
   .timeline::before {
     left: 5px;
+  }
+
+  .hero-photo {
+    width: 180px;
+    height: 180px;
   }
 }

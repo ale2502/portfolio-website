@@ -1,5 +1,21 @@
 # Progress Journal
 
+## 2026-08-10
+
+Mobile responsive pass on the hero (`src/pages/Home.tsx`, `src/index.css`) — stacked layout, photo now visible on small screens, missing side padding fixed.
+
+**Hero mobile layout**
+- Hero row switched from a fixed `flex items-center` row to `flex flex-col md:flex-row items-start md:items-center` — stacks text above photo on mobile (matches JSX order: text block, then `.hero-photo-wrap`), reverts to the existing side-by-side row at `md`.
+- Profile photo was previously `hidden md:block`, i.e. not rendered at all below 768px. Dropped `hidden` so it shows on mobile too, plus a mobile-only size override (`.hero-photo` down to 180px from 250px) in the existing `@media (max-width: 640px)` block.
+- Buttons (`.hero-btn`) were left untouched — their own padding is a scoped plain-CSS rule, unaffected.
+
+**Bug fixed**
+- The hero row's side padding (`px-6`) was a silent no-op — `index.css`'s unlayered universal reset (`*, *::before, *::after { margin: 0; padding: 0; }`) sits outside any `@layer` block, so per the CSS cascade-layers spec it beats Tailwind's `padding` utility regardless of specificity/order (same class of bug as the `mt-8`/`mt-12` hero-button issue from 2026-08-08). Fixed with a new scoped class, `.hero-content { padding: 0 1.5rem; }`, following the project's established one-off-class pattern instead of relayering `index.css`.
+
+**Next up**
+- Decide whether the mobile photo should stay left-aligned (flush with the text) or be centered under it — currently left-aligned by default.
+- Remaining open items from 2026-08-09 (Font Awesome attribution, dead CSS cleanup, Projects-page GitHub icon sizing) still outstanding.
+
 ## 2026-08-09
 
 Built out the About page, retired Home's old scroll sections in favor of a single-viewport hero, and spent most of the session on a new global "contact dock" — plus a real Vercel build failure that traced back to a Framer Motion typing gap.

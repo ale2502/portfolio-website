@@ -438,6 +438,12 @@ main {
   flex: 1;
 }
 
+.project-card p.project-note {
+  font-size: 0.8rem;
+  font-style: italic;
+  flex: 0;
+}
+
 .project-tags {
   display: flex;
   flex-wrap: wrap;

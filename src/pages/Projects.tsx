@@ -5,6 +5,7 @@ const projects = [
   {
     title: 'GrindNotes',
     desc: 'A work-in-progress mobile app for gym enthusiasts, where the users can track their progress.',
+    note: '*It can take a few seconds to load the API.',
     tags: ['React', 'TypeScript', 'Node.js', 'SQLite'],
     image: '/projects/grindnotes.webp',
     live: 'https://workout-log-app-mobile-v2.onrender.com',
@@ -12,7 +13,7 @@ const projects = [
   },
   {
     title: 'Portfolio website',
-    desc: 'A website to showcase my journey and projects',
+    desc: 'A website to showcase my journey and projects.',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     image: '/projects/project-two.webp',
     live: 'https://www.alessandrojablonski.com/',
@@ -67,6 +68,7 @@ export default function Projects() {
               <div className="project-card-body">
                 <h3>{p.title}</h3>
                 <p>{p.desc}</p>
+                {p.note && <p className="project-note">{p.note}</p>}
                 <div className="project-tags">
                   {p.tags.map((t) => (
                     <span key={t} className="skill-tag">

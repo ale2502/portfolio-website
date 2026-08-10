@@ -349,6 +349,34 @@ main {
 @media (max-width: 768px) {
   .about-intro-grid {
     flex-direction: column;
+    align-items: stretch;
+    padding-top: 1rem;
+  }
+
+  .about-video,
+  .about-statement {
+    flex: none; /* stop the desktop 400px/320px basis being read as a HEIGHT now that the axis is vertical */
+    width: 100%;
+    max-width: 100%;
+    min-width: 0; /* flex items default to min-width: auto, which can still force overflow otherwise */
+  }
+
+  .about-statement p {
+    font-size: 1.35rem;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+  }
+
+  .about-statement p::before {
+    left: 0;
+    top: -1rem;
+    font-size: 3rem;
+  }
+
+  .about-statement p::after {
+    right: 0;
+    bottom: -1.5rem;
+    font-size: 3rem;
   }
 }
 

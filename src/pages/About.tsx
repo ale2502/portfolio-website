@@ -31,7 +31,12 @@ export default function About() {
           variants={container}
         >
           <motion.div className="about-video" variants={fadeUp}>
-            <LiteYouTubeEmbed id="ldvtz73QZ0I" title="Intro video" />
+            <LiteYouTubeEmbed
+              id="ldvtz73QZ0I"
+              title="Intro video"
+              autoplay
+              muted
+            />
           </motion.div>
           <motion.div className="about-statement" variants={fadeUp}>
             <p>

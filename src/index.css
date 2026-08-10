@@ -351,6 +351,7 @@ main {
     flex-direction: column;
     align-items: stretch;
     padding-top: 1rem;
+    padding-bottom: 1.5rem;
   }
 
   .about-video,
@@ -377,6 +378,15 @@ main {
     right: 0;
     bottom: -1.5rem;
     font-size: 3rem;
+  }
+
+  .hamburger-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .timeline-section {
+    padding-top: 2rem; /* was inheriting 4rem from the generic `section` rule */
   }
 }
 

@@ -20,12 +20,11 @@ const projects = [
     code: 'https://github.com/ale2502/portfolio-website',
   },
   {
-    title: 'Project Three',
-    desc: 'Placeholder description — what it does, the problem it solves, and your role building it.',
-    tags: ['React', 'Git'],
+    title: 'Grazing Ops Simulator',
+    desc: "An early stage of a fake farm-management app inspired on Halter's model. The key idea is to manage herds to feed from the ideal paddock.",
+    tags: ['React', 'TypeScript', 'Node.js', 'Postgres'],
     image: '/projects/project-three.webp',
-    live: '#',
-    code: '#',
+    code: 'https://github.com/ale2502/grazing-ops-simulator',
   },
 ];
 
@@ -77,17 +76,19 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className="project-links">
-                  <a
-                    href={p.live}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="project-live-btn"
-                  >
-                    <svg>
-                      <use href="/icons.svg#globe-icon" />
-                    </svg>
-                    Live Demo
-                  </a>
+                  {p.live && (
+                    <a
+                      href={p.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-live-btn"
+                    >
+                      <svg>
+                        <use href="/icons.svg#globe-icon" />
+                      </svg>
+                      Live Demo
+                    </a>
+                  )}
                   <a
                     href={p.code}
                     target="_blank"

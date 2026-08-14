@@ -17,7 +17,7 @@ Live at [alessandrojablonski.com](https://www.alessandrojablonski.com/).
 - **Tailwind CSS** for styling
 - **Framer Motion** for the fade-ins and small animations
 - **react-lite-youtube-embed** for the intro video
-
+ 
 ## Running it locally
 
 ```bash

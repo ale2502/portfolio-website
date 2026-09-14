@@ -32,7 +32,7 @@ export default function About() {
         >
           <motion.div className="about-video" variants={fadeUp}>
             <LiteYouTubeEmbed
-              id="ldvtz73QZ0I"
+              id="V2hlB8rqCOE"
               title="Intro video"
               autoplay
               muted
